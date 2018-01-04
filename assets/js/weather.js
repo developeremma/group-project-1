@@ -1,4 +1,4 @@
-$(document).ready(function($) {
+$(document).ready(function() {
   $.ajax({
   url : "http://api.wunderground.com/api/4356bb932290f7bc/geolookup/q/autoip.json",
   dataType : "jsonp",
