@@ -13,7 +13,7 @@ $(document).ready(function () {
     // Create a variable to reference the database
     var database = firebase.database();
 
-    $('#volunteerSubmit').on('click', function (event) {
+    $("#volunteerSubmit").on('click', function (event) {
         event.preventDefault();
 
         // Grabs user input
