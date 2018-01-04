@@ -17,8 +17,8 @@ $(document).ready(function () {
         event.preventDefault();
 
         // Grabs user input
-        var inputName = $("#Volunteername").val().trim();
-        var inputPhone = $("#Volunteerphone").val().trim();
+        var inputName = $("#volunteerName").val().trim();
+        var inputPhone = $("#volunteerPhone").val().trim();
 
         // Creates local "temporary" object for holding volunteer data
         var volunteerValues = {
