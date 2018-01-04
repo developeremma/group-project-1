@@ -28,7 +28,6 @@ $(document).ready(function () {
 
         // Push new values to the database
         database.ref().push(volunteerValues);
-        Materialize.toast('You have added a train', 3000) // 4000 is the duration of the toast
 
         // Clear out text fields after submit
         $("#name").val("");
