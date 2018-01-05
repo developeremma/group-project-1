@@ -72,7 +72,7 @@
   
 //Event handlers 
 
-  $('#store').on('click',function(event){
+  $('#hospitalsButton').on('click',function(event){
            
             //Reset Object array
 
@@ -82,12 +82,12 @@
             service.nearbySearch({
             location: pos,
             radius: 1500,
-            type: ['department_store']
+            type: ['hospitals']
         }, callback);
 
   })
 
-  $('#store').on('click',function(event){
+  $('#foodButton').on('click',function(event){
            
             //Reset Object array
 
@@ -97,7 +97,21 @@
             service.nearbySearch({
             location: pos,
             radius: 1500,
-            type: ['pharmacy']
+            type: ['restaurant']
+        }, callback);
+
+  })
+  $('#gasButton').on('click',function(event){
+           
+            //Reset Object array
+
+            ObjArray=[];
+            /*clearMarkers();*/
+
+            service.nearbySearch({
+            location: pos,
+            radius: 1500,
+            type: ['gas_station']
         }, callback);
 
   })
