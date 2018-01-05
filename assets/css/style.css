@@ -10,6 +10,9 @@ body {
   color: white;
   font-family: Helvetica;
 }
+.card{
+ color: black;
+}
 
 @media (min-width: 992px) {
   body {
