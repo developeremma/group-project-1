@@ -16,6 +16,9 @@ body {
  background-color: yellow;
 
 }
+.card-footer{
+ background-color:black; 
+}
 
 @media (min-width: 992px) {
   body {
