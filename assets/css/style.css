@@ -12,6 +12,9 @@ body {
 }
 .card{
  color: black;
+ font-family: Helvetica;
+ background-color: yellow;
+
 }
 
 @media (min-width: 992px) {
