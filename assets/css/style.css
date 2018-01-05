@@ -19,9 +19,4 @@ body {
         height: 500px;
     }
 
-    html,
-    body {
-        height: 50%;
-        margin: 0;
-        padding: 0;
-    }
+    
