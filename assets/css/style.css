@@ -10,12 +10,9 @@ body {
   color: white;
   font-family: Helvetica; */
 font-family: Helvetica;
+color: white;
 	
-}
-#pIntro{
-color: yellow;
-}
-	
+}	
 
 @media (min-width: 992px) {
   body {
