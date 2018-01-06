@@ -9,17 +9,10 @@ body {
   background-color:black;
   color: white;
   font-family: Helvetica; */
+font-family: Helvetica;
 	
 }
-.card{
- color: black;
- font-family: Helvetica;
- background-color: yellow;
 
-}
-.card-footer{
- background-color:black; 
-}
 
 @media (min-width: 992px) {
   body {
