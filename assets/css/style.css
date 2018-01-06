@@ -12,7 +12,10 @@ body {
 font-family: Helvetica;
 	
 }
-
+#pIntro{
+color: yellow;
+}
+	
 
 @media (min-width: 992px) {
   body {
