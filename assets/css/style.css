@@ -22,7 +22,7 @@ color: white;
 }
 
 #map {
-        width: 600px;
+        width: auto;
         height: 300px;
     }
 .navbar {
