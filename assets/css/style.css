@@ -27,5 +27,7 @@ color: white;
         width: 600px;
         height: 300px;
     }
-
+.navbar {
+  background: none;
+}
     
