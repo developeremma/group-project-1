@@ -13,7 +13,9 @@ font-family: Helvetica;
 color: white;
 	
 }	
-
+.card-body{
+color: white;	
+}
 @media (min-width: 992px) {
   body {
     padding-top: 56px;
