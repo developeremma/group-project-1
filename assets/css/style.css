@@ -9,14 +9,12 @@ body {
   background-color:black;
   color: white;
   font-family: Helvetica; */
-padding-top: 54px;
+padding-top: 86px;
 font-family: Helvetica;
 color: white;
 	
 }	
-.card-body{
-color: white;	
-}
+
 @media (min-width: 992px) {
   body {
     padding-top: 56px;
