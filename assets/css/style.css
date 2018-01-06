@@ -9,14 +9,7 @@ body {
   background-color:black;
   color: white;
   font-family: Helvetica; */
-  .bg {
-	/* Background image and gradient */
-   background: linear-gradient(to bottom, #ffee75 3%,#ffb06b 27%,#e86f97 50%,#b08cff 75%,#5477af 100%);
-  
-
-  background-blend-mode: color-burn;
-  padding: 100%;
-} 
+	
 }
 .card{
  color: black;
