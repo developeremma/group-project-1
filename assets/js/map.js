@@ -9,6 +9,10 @@
     var longitude;
     var pos = { lat: 37.7918126, lng: -122.3937578 }; //shiv: Do not remove these, it will get overwritten
     
+    /* 
+    
+    comment firebase stuff
+    
     var config = {
     		apiKey: "AIzaSyCsKeWe6ioIHzQYmJII_t3Ot09R6xC1Lp8",
     		authDomain: "sosproject-12b7e.firebaseapp.com",
@@ -18,8 +22,9 @@
     		messagingSenderId: "872847968348"
   		};
     firebase.initializeApp(config);
-    var database = firebase.database();
-
+  
+var database = firebase.database();
+*/
     function initMap() {
         if (navigator.geolocation) //geo location API
         {
@@ -67,6 +72,7 @@
 
         //Check if the place exists in Firebase , if not insert into Firebase
 
+/*
           name = place.name;
 	      place_id = place.place_id;
 	      is_open = true;
@@ -84,6 +90,7 @@
 	        		latitude: latitude,
 				longitude: longitude
 		    });
+*/
 
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(place.name);
@@ -98,7 +105,7 @@
    		{
     		MarkerArray[i].setMap(null);
     	}
-	}
+   }
 
   
 //Event handlers 
