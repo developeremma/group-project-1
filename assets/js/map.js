@@ -67,6 +67,7 @@ function initMap() {
             }, callback_fb_volunteer_load);
 
             console.log('All data pushed to FireBase');
+
         })
     }
 }
@@ -88,7 +89,7 @@ function callback_fb_volunteer_load(results, status) {
         $("#volunteerTable").append("<tr><td>" + inputName + "</td><td>" + inputPhone + "</td><td>" + "</td></tr>");
 
         var MarkerLatLng = { lat: obj.latitude, lng: obj.longitude };
-        createMarker(MarkerLatLng, 'volunteer');
+        createMarker(MarkerLatLng, 'Volunteer', obj);
     });
 }
 
@@ -125,45 +126,47 @@ function insert_into_firebase(place) {
     });
 }
 
-function callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-            ObjArray.push(results[i]);
-        }
-    }
-}
+function createMarker(markerlocation, type, Object) {
 
-function createMarker(markerlocation, URLType) {
-
-    if (URLType == "Yes") {
-        green_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-    } else if (URLType == "volunteer") {
-        green_URL = "./assets/images/volunteer.png";
+    if (type == 'Volunteer') {
+        icon_URL = "./assets/images/volunteer.png";
     } else {
-        green_URL = "";
+        if (Object.reported == "Yes")
+            icon_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        else icon_URL = "";
     }
 
     marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
         position: markerlocation,
-        icon: green_URL,
+        icon: icon_URL,
     });
 
     //Check if the place exists in Firebase , if not insert into Firebase
 
+
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
+        var infowindow = new google.maps.InfoWindow();
+
+        switch (type) {
+
+            case 'Volunteer':
+                infowindow.setContent('<p style="font-weight: bold;"> Volunteer Name : ' + Object.name +
+                    '</p> <p style="color:blue;"> Phone : ' + Object.phone + '</p>');
+                infowindow.open(map, this);
+                break;
+            default:
+                infowindow.setContent('<p style="font-weight: bold;">' + type + ' Name : ' + Object.name +
+                    '</p> <p style="color:blue;"> Is Open : ' + Object.reported + '</p>');
+                infowindow.open(map, this);
+        }
     });
 
-    if (URLType != "volunteer") {
+    if (type != 'Volunteer') {
         MarkerArray.push(marker);
     }
 }
-
-
 
 function clearMarkers() {
     for (var i = 0; i < MarkerArray.length; i++) {
@@ -182,28 +185,22 @@ $('#hospitalsButton').on('click', function(event) {
     //Reset Object array
     database.ref().child('MapData').child(cityName).child('hospital').on('value', function(snapshot) {
         //console.log(snapshot.val());
-        $(".btn-group-vertical").html("");
+        $(".list-group").html("");
 
         obj = snapshot.val();
-        console.log(obj);
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
-                $("#map").height(500); //sh : why are we doing this ?? //em: because if we dont the card gets blank white space when list grows on row. Doing this as a workaround for now
+                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </li> ');
+                $("#map").height(500); //sh : why are we doing this ??
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
-            createMarker(MarkerLatLng, obj[key].reported);
-               $(".btn-group-vertical").click(function() {
-                $('.modal').modal({
-                    show: true
-                    });
-                }); 
+            createMarker(MarkerLatLng, 'Hospital', obj[key]);
         }
     });
 })
 
 $('#foodButton').on('click', function(event) {
-        $(".btn-group-vertical").html("");
+    $(".list-group").html("");
 
     //Reset Object array
 
@@ -213,25 +210,19 @@ $('#foodButton').on('click', function(event) {
     database.ref().child('MapData').child(cityName).child('convenience_store').on('value', function(snapshot) {
         //console.log(snapshot.val());
         obj = snapshot.val();
-        console.log(obj);
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
+                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </li> ');
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
-            createMarker(MarkerLatLng, obj[key].reported);
-            $(".btn-group-vertical").click(function() {
-                $('.modal').modal({
-                    show: true
-                    });
-                });
+            createMarker(MarkerLatLng, 'Store', obj[key]);
         }
     });
 })
 
 $('#gasButton').on('click', function(event) {
-        $(".btn-group-vertical").html("");
+    $(".list-group").html("");
 
     //Reset Object array
 
@@ -243,22 +234,15 @@ $('#gasButton').on('click', function(event) {
         obj = snapshot.val();
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
+                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Report Open ? : ' + obj[key].reported + '</p> </li> ');
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
-            createMarker(MarkerLatLng, obj[key].reported);
-             $(".btn-group-vertical").click(function() {
-                $('.modal').modal({
-                    show: true
-                    });
-                }); 
+            createMarker(MarkerLatLng, 'Gas Station', obj[key]);
         }
     });
 
 })
-
-
 
 // Initialize Firebase
 
