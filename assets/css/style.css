@@ -17,10 +17,32 @@ color: white;
 
 @media (min-width: 992px) {
   body {
-    padding-top: 56px;
+    padding-top: 86px;
   }
 }
-
+.card{
+  background-color: transparent;
+  border:none;
+  color:white;
+}
+.card-title,.card-text{
+  color:white;
+}
+.list-group-item{
+  background-color: transparent;
+  color:white;
+}
+.card-footer{
+  border:none;
+  color:white;
+}
+#marker{
+  width: auto;
+  height: 166px;
+}
+#findCard{
+  height: 500px;
+}
 #map {
         width: auto;
         height: 300px;
