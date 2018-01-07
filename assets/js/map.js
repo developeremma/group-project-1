@@ -7,6 +7,8 @@ var MarkerArray = [];
 var varType;
 var latitude;
 var longitude;
+var updatePlaceKey;
+var updatePlaceType;
 
 var pos = { lat: 37.7918126, lng: -122.3937578 }; //shiv: Do not remove these, it will get overwritten
 
@@ -119,7 +121,7 @@ function insert_into_firebase(place) {
         "name": name,
         "type": type,
         "place_id": place_id,
-        "reported": 'No',
+        /*"reported": 'No',*/
         "latitude": latitude,
         "longitude": longitude,
         "vicinity": place.vicinity,
@@ -128,14 +130,17 @@ function insert_into_firebase(place) {
 
 function createMarker(markerlocation, type, Object) {
 
-    switch(type) {
-    case 'Volunteer': icon_URL = "./assets/images/volunteer.png";
-                      break;
-    case 'Hospital' : icon_URL = "./assets/images/hospital.png";
-                      break;
-    default:          icon_URL = "";
+    switch (type) {
+        case 'Volunteer':
+            icon_URL = "./assets/images/volunteer.png";
+            break;
+        case 'Hospital':
+            icon_URL = "./assets/images/hospital.png";
+            break;
+        default:
+            icon_URL = "";
     }
-    
+
     marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
@@ -185,28 +190,64 @@ $('#hospitalsButton').on('click', function(event) {
     //Reset Object array
     database.ref().child('MapData').child(cityName).child('hospital').on('value', function(snapshot) {
         //console.log(snapshot.val());
-         $(".btn-group-vertical").html("");
+        $(".btn-group-vertical").html("");
 
         obj = snapshot.val();
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
+                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger sosbuttons" place_type=' + obj[key].type + ' place_id="' + obj[key].name.concat(obj[key].place_id) + '" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
                 $("#map").height(500); //sh : why are we doing this ??
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, 'Hospital', obj[key]);
-             $(".btn-group-vertical").click(function() {
-                 $('.modal').modal({
-                     show: true
-                     });
-                 });
+
 
         }
     });
 })
 
+$(document).on('click', '.sosbuttons', function(event) {
+    updatePlaceKey = $(this).attr('place_id');
+    updatePlaceType = $(this).attr('place_type');
+    $('.modal').modal({
+        show: true
+    });
+});
+
+//Modal Event Listners
+
+$('#open').on('click', function() {
+
+    console.log('change ' + updatePlaceKey + ' to open and Type is ' + updatePlaceType);
+
+    console.log($(this).attr('id'));
+
+    const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
+    var primarykey = updatePlaceKey;
+
+    city.child(primarykey).update({
+        "reported": 'Open',
+        LastReported : firebase.database.ServerValue.TIMESTAMP,
+    });
+
+});
+
+
+$('#closed').on('click', function() {
+
+    console.log('change ' + updatePlaceKey + ' to closed and Type is ' + updatePlaceType);
+    console.log($(this).attr('id'));
+    const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
+    var primarykey = updatePlaceKey;
+
+    city.child(primarykey).update({
+        "reported": 'Closed',
+        LastReported : firebase.database.ServerValue.TIMESTAMP,
+    });
+});
+
 $('#foodButton').on('click', function(event) {
- $(".btn-group-vertical").html("");
+    $(".btn-group-vertical").html("");
 
     //Reset Object array
 
@@ -224,17 +265,16 @@ $('#foodButton').on('click', function(event) {
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, 'Store', obj[key]);
             $(".btn-group-vertical").click(function() {
-                 $('.modal').modal({
-                     show: true
-                     });
+                $('.modal').modal({
+                    show: true
                 });
-
+            });
         }
     });
 })
 
 $('#gasButton').on('click', function(event) {
-     $(".btn-group-vertical").html("");
+    $(".btn-group-vertical").html("");
 
     //Reset Object array
 
@@ -254,8 +294,8 @@ $('#gasButton').on('click', function(event) {
             $(".btn-group-vertical").click(function() {
                 $('.modal').modal({
                     show: true
-                    });
-                }); 
+                });
+            });
         }
     });
 
