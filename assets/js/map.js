@@ -116,11 +116,19 @@ function callback(results, status) {
     }
 }
 
-function createMarker(markerlocation) {
+function createMarker(markerlocation, isOpen) {
+
+    var green_URL = ""
+
+    if (isOpen == "Yes") {
+        green_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+    }
 
     marker = new google.maps.Marker({
         map: map,
-        position: markerlocation
+        animation: google.maps.Animation.DROP,
+        position: markerlocation,
+        icon: green_URL,
     });
 
     //Check if the place exists in Firebase , if not insert into Firebase
@@ -149,11 +157,11 @@ $('#hospitalsButton').on('click', function(event) {
     ObjArray = [];
     clearMarkers();
 
-    $(".list-group").html("");
-
     //Reset Object array
     database.ref().child('MapData').child(cityName).child('hospital').on('value', function(snapshot) {
         //console.log(snapshot.val());
+        $(".list-group").html("");
+
         obj = snapshot.val();
         console.log(obj);
         for (var key in obj) {
@@ -162,7 +170,7 @@ $('#hospitalsButton').on('click', function(event) {
                 $("#map").height(500); //sh : why are we doing this ??
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
-            createMarker(MarkerLatLng);
+            createMarker(MarkerLatLng, obj[key].reported);
         }
     });
 })
@@ -185,7 +193,7 @@ $('#foodButton').on('click', function(event) {
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
-            createMarker(MarkerLatLng);
+            createMarker(MarkerLatLng, obj[key].reported);
         }
     });
 })
@@ -204,11 +212,11 @@ $('#gasButton').on('click', function(event) {
         console.log(obj);
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </li> ');
+                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Report Open ? : ' + obj[key].reported + '</p> </li> ');
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
-            createMarker(MarkerLatLng);
+            createMarker(MarkerLatLng, obj[key].reported);
         }
     });
 
