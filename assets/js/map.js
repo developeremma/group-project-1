@@ -111,7 +111,8 @@ var database = firebase.database();
 //Event handlers 
 
   $('#hospitalsButton').on('click',function(event){
-           
+            $(".list-group").html("");
+
             //Reset Object array
 
             ObjArray=[];
@@ -122,11 +123,16 @@ var database = firebase.database();
             radius: 1500,
             type: ['hospitals']
         }, callback);
+ 	for(var i=0; i< 10; i++){
 
+    		$(".list-group").append('<li class="list-group-item">'+ObjArray.name+"</li>");
+		 $("#map").height(500);
+    }
   })
 
   $('#foodButton').on('click',function(event){
-           
+            $(".list-group").html("");
+
             //Reset Object array
 
             ObjArray=[];
@@ -137,10 +143,15 @@ var database = firebase.database();
             radius: 1500,
             type: ['restaurant']
         }, callback);
+   for(var i=0; i< 10; i++){
 
+    $(".list-group").append('<li class="list-group-item">'+ObjArray.name+"</li>");
+    $("#map").height(500);
+    }
   })
   $('#gasButton').on('click',function(event){
-           
+    $(".list-group").html("");
+
             //Reset Object array
 
             ObjArray=[];
@@ -151,5 +162,8 @@ var database = firebase.database();
             radius: 1500,
             type: ['gas_station']
         }, callback);
-
+         for(var i=0; i< 10; i++){
+    $(".list-group").append('<li class="list-group-item">'+ObjArray.name+"</li>");
+    $("#map").height(500);
+    }
   })
