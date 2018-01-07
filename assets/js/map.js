@@ -67,8 +67,6 @@ function initMap() {
             }, callback_fb_volunteer_load);
 
             console.log('All data pushed to FireBase');
-
-            loadvolunteerdata();
         })
     }
 }
