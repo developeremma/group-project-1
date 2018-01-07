@@ -128,14 +128,14 @@ function insert_into_firebase(place) {
 
 function createMarker(markerlocation, type, Object) {
 
-    if (type == 'Volunteer') {
-        icon_URL = "./assets/images/volunteer.png";
-    } else {
-        if (Object.reported == "Yes")
-            icon_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-        else icon_URL = "";
+    switch(type) {
+    case 'Volunteer': icon_URL = "./assets/images/volunteer.png";
+                      break;
+    case 'Hospital' : icon_URL = "./assets/images/hospital.png";
+                      break;
+    default:          icon_URL = "";
     }
-
+    
     marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
