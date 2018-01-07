@@ -218,10 +218,6 @@ $(document).on('click', '.sosbuttons', function(event) {
 
 $('#open').on('click', function() {
 
-    console.log('change ' + updatePlaceKey + ' to open and Type is ' + updatePlaceType);
-
-    console.log($(this).attr('id'));
-
     const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
     var primarykey = updatePlaceKey;
 
@@ -235,8 +231,6 @@ $('#open').on('click', function() {
 
 $('#closed').on('click', function() {
 
-    console.log('change ' + updatePlaceKey + ' to closed and Type is ' + updatePlaceType);
-    console.log($(this).attr('id'));
     const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
     var primarykey = updatePlaceKey;
 
@@ -247,7 +241,7 @@ $('#closed').on('click', function() {
 });
 
 $('#foodButton').on('click', function(event) {
-    $(".btn-group-vertical").html("");
+    
 
     //Reset Object array
 
@@ -256,10 +250,11 @@ $('#foodButton').on('click', function(event) {
 
     database.ref().child('MapData').child(cityName).child('convenience_store').on('value', function(snapshot) {
         //console.log(snapshot.val());
+        $(".btn-group-vertical").html("");
         obj = snapshot.val();
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
+                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger sosbuttons" place_type=' + obj[key].type + ' place_id="' + obj[key].name.concat(obj[key].place_id) + '" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
@@ -283,10 +278,11 @@ $('#gasButton').on('click', function(event) {
 
     database.ref().child('MapData').child(cityName).child('gas_station').on('value', function(snapshot) {
         //console.log(snapshot.val());
+        $(".btn-group-vertical").html("");
         obj = snapshot.val();
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
+                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger sosbuttons" place_type=' + obj[key].type + ' place_id="' + obj[key].name.concat(obj[key].place_id) + '" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
