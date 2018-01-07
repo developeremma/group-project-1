@@ -28,9 +28,18 @@ color: white;
 .card-title,.card-text{
   color:white;
 }
-.list-group-item{
+/*.list-group-item{
   background-color: transparent;
   color:white;
+}*/
+
+#listbuttons{
+	background-color: transparent;
+	color:white;
+	border: none;
+}
+#listbuttons:hover{
+	background-color:red;
 }
 .card-footer{
   border:none;
