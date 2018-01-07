@@ -217,7 +217,7 @@ $(document).on('click', '.sosbuttons', function(event) {
 //Modal Event Listners
 
 $('#open').on('click', function() {
-
+    $('.modal').modal('toggle');
     const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
     var primarykey = updatePlaceKey;
 
@@ -230,7 +230,7 @@ $('#open').on('click', function() {
 
 
 $('#closed').on('click', function() {
-
+    $('.modal').modal('toggle');
     const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
     var primarykey = updatePlaceKey;
 
