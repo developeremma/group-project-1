@@ -64,12 +64,34 @@ function initMap() {
                 location: pos,
                 radius: 1500,
                 type: ['gas_station']
-            }, callback_fb_load);
+            }, callback_fb_volunteer_load);
 
+            console.log('All data pushed to FireBase');
+
+            loadvolunteerdata();
         })
-        console.log('All data pushed to FireBase');
     }
-    //Load all the data into firebase:
+}
+
+function callback_fb_volunteer_load(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+            insert_into_firebase(results[i]);
+        }
+    }
+
+    database.ref().child("MapData").child(cityName).child("volunteer").on('child_added', function(childSnapshot) {
+        // User input data
+        var obj = childSnapshot.val();
+        var inputName = obj.name;
+        var inputPhone = obj.phone;
+
+        // Append all the values to the table in the HTML
+        $("#volunteerTable").append("<tr><td>" + inputName + "</td><td>" + inputPhone + "</td><td>" + "</td></tr>");
+
+        var MarkerLatLng = { lat: obj.latitude, lng: obj.longitude };
+        createMarker(MarkerLatLng, 'volunteer');
+    });
 }
 
 function callback_fb_load(results, status) {
@@ -78,6 +100,7 @@ function callback_fb_load(results, status) {
             insert_into_firebase(results[i]);
         }
     }
+
 }
 
 function insert_into_firebase(place) {
@@ -98,13 +121,10 @@ function insert_into_firebase(place) {
         "type": type,
         "place_id": place_id,
         "reported": 'No',
-        /*"report": Open, sh: used update instead of set so that this field can be set later */
         "latitude": latitude,
         "longitude": longitude,
         "vicinity": place.vicinity,
-
     });
-
 }
 
 function callback(results, status) {
@@ -116,12 +136,14 @@ function callback(results, status) {
     }
 }
 
-function createMarker(markerlocation, isOpen) {
+function createMarker(markerlocation, URLType) {
 
-    var green_URL = ""
-
-    if (isOpen == "Yes") {
+    if (URLType == "Yes") {
         green_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+    } else if (URLType == "volunteer") {
+        green_URL = "./assets/images/volunteer.png";
+    } else {
+        green_URL = "";
     }
 
     marker = new google.maps.Marker({
@@ -138,7 +160,9 @@ function createMarker(markerlocation, isOpen) {
         infowindow.open(map, this);
     });
 
-    MarkerArray.push(marker);
+    if (URLType != "volunteer") {
+        MarkerArray.push(marker);
+    }
 }
 
 
@@ -209,7 +233,6 @@ $('#gasButton').on('click', function(event) {
     database.ref().child('MapData').child(cityName).child('gas_station').on('value', function(snapshot) {
         //console.log(snapshot.val());
         obj = snapshot.val();
-        console.log(obj);
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Report Open ? : ' + obj[key].reported + '</p> </li> ');
@@ -221,3 +244,34 @@ $('#gasButton').on('click', function(event) {
     });
 
 })
+
+
+
+// Initialize Firebase
+
+$("#volunteerSubmit").on('click', function(event) {
+
+    event.preventDefault();
+
+    // Grabs user input
+    var inputName = $("#volunteerName").val().trim();
+    var inputPhone = $("#volunteerPhone").val().trim();
+
+    // Creates local "temporary" object for holding volunteer data
+
+    // Push new values to the database
+
+    const volunteerRef = database.ref().child("MapData").child(cityName).child("volunteer");
+    var volunteerKey = inputName.concat(inputPhone); //Primary
+
+    volunteerRef.child(volunteerKey).update({
+        name: inputName,
+        phone: inputPhone,
+        city: cityName,
+        latitude: pos.lat,
+        longitude: pos.lng
+    });
+    // Clear out text fields after submit
+    $("#volunteerName").val("");
+    $("#volunteerPhone").val("");
+});
