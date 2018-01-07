@@ -182,23 +182,28 @@ $('#hospitalsButton').on('click', function(event) {
     //Reset Object array
     database.ref().child('MapData').child(cityName).child('hospital').on('value', function(snapshot) {
         //console.log(snapshot.val());
-        $(".list-group").html("");
+        $(".btn-group-vertical").html("");
 
         obj = snapshot.val();
         console.log(obj);
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </li> ');
+                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
                 $("#map").height(500); //sh : why are we doing this ??
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, obj[key].reported);
+               $(".btn-group-vertical").click(function() {
+                $('.modal').modal({
+                    show: true
+                    });
+                }); 
         }
     });
 })
 
 $('#foodButton').on('click', function(event) {
-    $(".list-group").html("");
+        $(".btn-group-vertical").html("");
 
     //Reset Object array
 
@@ -211,17 +216,22 @@ $('#foodButton').on('click', function(event) {
         console.log(obj);
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </li> ');
+                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, obj[key].reported);
+            $(".btn-group-vertical").click(function() {
+                $('.modal').modal({
+                    show: true
+                    });
+                });
         }
     });
 })
 
 $('#gasButton').on('click', function(event) {
-    $(".list-group").html("");
+        $(".btn-group-vertical").html("");
 
     //Reset Object array
 
@@ -233,11 +243,16 @@ $('#gasButton').on('click', function(event) {
         obj = snapshot.val();
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                $(".list-group").append('<li class="list-group-item">' + obj[key].name + '<p> Report Open ? : ' + obj[key].reported + '</p> </li> ');
+                $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, obj[key].reported);
+             $(".btn-group-vertical").click(function() {
+                $('.modal').modal({
+                    show: true
+                    });
+                }); 
         }
     });
 
