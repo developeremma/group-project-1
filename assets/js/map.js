@@ -189,7 +189,7 @@ $('#hospitalsButton').on('click', function(event) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
-                $("#map").height(500); //sh : why are we doing this ??
+                $("#map").height(500); //sh : why are we doing this ?? //em: because if we dont the card gets blank white space when list grows on row. Doing this as a workaround for now
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, obj[key].reported);
