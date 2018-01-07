@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
 
     // Initialize Firebase
     var config = {
@@ -47,3 +47,4 @@ $(document).ready(function () {
         $("#volunteerTable").append("<tr><td>" + inputName + "</td><td>" + inputPhone + "</td><td>" + "</td></tr>");
     });
 });
+*/
