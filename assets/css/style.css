@@ -1,9 +1,3 @@
-/*!
- * Start Bootstrap - Small Business (https://startbootstrap.com/template-overviews/small-business)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-small-business/blob/master/LICENSE)
- */
-
 html{
 height:100%;
 width:100%;
@@ -15,13 +9,11 @@ color: white;
 height:100%;
 width:100%;
 	
-}	
-/* footer{
-position:absolute;
-width:100%;
-bottom:0;
-font-size:15px;
-} */
+}
+#lifesavercardbody{
+  color:white;
+  text-align: center;
+}
 #messageModal{
   color:black;
   width: 400px;
@@ -36,6 +28,11 @@ font-size:15px;
   body {
     padding-top: 86px;
   }
+}
+.btn-group-vertical{
+ overflow:auto; 
+ height:200px; 
+ display: inline-block;
 }
 .card{
   background-color: transparent;
@@ -59,11 +56,16 @@ font-size:15px;
   color:white;
 }
 #marker{
-  width: auto;
-  height: 166px;
+    height: 20%;
+    width: 20%;
+    padding: 2px;
 }
 #findCard{
   height: 500px;
+}
+#lifesaver{
+  height: 100%;
+  width: 100%;
 }
 #map {
         width: auto;
