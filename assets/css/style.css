@@ -4,15 +4,23 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-small-business/blob/master/LICENSE)
  */
 
+html{
+height:100%;
+width:100%;
+}
 body {
-/*   
-  background-color:black;
-  color: white;
-  font-family: Helvetica; */
 padding-top: 86px;
 font-family: Helvetica;
 color: white;
+height:100%;
+width:100%;
 	
+}	
+footer{
+position:absolute;
+width:100%;
+bottom:0;
+font-size:15px;
 }	
 
 @media (min-width: 992px) {
@@ -28,10 +36,6 @@ color: white;
 .card-title,.card-text{
   color:white;
 }
-/*.list-group-item{
-  background-color: transparent;
-  color:white;
-}*/
 
 #listbuttons{
 	background-color: transparent;
