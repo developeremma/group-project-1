@@ -9,6 +9,8 @@ var latitude;
 var longitude;
 var updatePlaceKey;
 var updatePlaceType;
+//hide div that will only show when buttons pressed
+$("#hereyougo").hide();
 
 var pos = { lat: 37.7918126, lng: -122.3937578 }; //shiv: Do not remove these, it will get overwritten
 
@@ -186,7 +188,9 @@ $('#hospitalsButton').on('click', function(event) {
 
     ObjArray = [];
     clearMarkers();
-
+    //change divs
+    $("#hereyougo").show();
+    $("#lifesaveronload").hide();
     //Reset Object array
     database.ref().child('MapData').child(cityName).child('hospital').on('value', function(snapshot) {
         //console.log(snapshot.val());
@@ -247,7 +251,10 @@ $('#foodButton').on('click', function(event) {
 
     ObjArray = [];
     clearMarkers();
-
+    //change divs
+    $("#hereyougo").show();
+    $("#lifesaveronload").hide();
+    
     database.ref().child('MapData').child(cityName).child('convenience_store').on('value', function(snapshot) {
         //console.log(snapshot.val());
         $(".btn-group-vertical").html("");
@@ -275,6 +282,9 @@ $('#gasButton').on('click', function(event) {
 
     ObjArray = [];
     clearMarkers();
+    //change divs
+    $("#hereyougo").show();
+    $("#lifesaveronload").hide();
 
     database.ref().child('MapData').child(cityName).child('gas_station').on('value', function(snapshot) {
         //console.log(snapshot.val());
