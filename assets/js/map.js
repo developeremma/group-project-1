@@ -196,7 +196,7 @@ $('#hospitalsButton').on('click', function(event) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger sosbuttons" place_type=' + obj[key].type + ' place_id="' + obj[key].name.concat(obj[key].place_id) + '" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
-                $("#map").height(500); //sh : why are we doing this ??
+//                 $("#map").height(500); 
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, 'Hospital', obj[key]);
@@ -255,7 +255,7 @@ $('#foodButton').on('click', function(event) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger sosbuttons" place_type=' + obj[key].type + ' place_id="' + obj[key].name.concat(obj[key].place_id) + '" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
-                $("#map").height(500);
+//                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, 'Store', obj[key]);
@@ -283,7 +283,7 @@ $('#gasButton').on('click', function(event) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 $(".btn-group-vertical").append('<button type="list-button" class="btn btn-danger sosbuttons" place_type=' + obj[key].type + ' place_id="' + obj[key].name.concat(obj[key].place_id) + '" id="listbuttons">' + obj[key].name + '<p> Reported Open ? : ' + obj[key].reported + '</p> </button> ');
-                $("#map").height(500);
+//                 $("#map").height(500);
             }
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, 'Gas Station', obj[key]);
