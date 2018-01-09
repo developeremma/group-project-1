@@ -209,7 +209,7 @@ $('#hospitalsButton').on('click', function(event) {
 $(document).on('click', '.sosbuttons', function(event) {
     updatePlaceKey = $(this).attr('place_id');
     updatePlaceType = $(this).attr('place_type');
-    $('.modal').modal({
+    $('#mapsModal').modal({
         show: true
     });
 });
@@ -217,7 +217,7 @@ $(document).on('click', '.sosbuttons', function(event) {
 //Modal Event Listners
 
 $('#open').on('click', function() {
-    $('.modal').modal('toggle');
+    $('#mapsModal').modal('toggle');
     const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
     var primarykey = updatePlaceKey;
 
@@ -230,7 +230,7 @@ $('#open').on('click', function() {
 
 
 $('#closed').on('click', function() {
-    $('.modal').modal('toggle');
+    $('#mapsModal').modal('toggle');
     const city = database.ref().child("MapData").child(cityName).child(updatePlaceType);
     var primarykey = updatePlaceKey;
 
@@ -260,7 +260,7 @@ $('#foodButton').on('click', function(event) {
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, 'Store', obj[key]);
             $(".btn-group-vertical").click(function() {
-                $('.modal').modal({
+                $('#mapsModal').modal({
                     show: true
                 });
             });
@@ -288,7 +288,7 @@ $('#gasButton').on('click', function(event) {
             var MarkerLatLng = { lat: obj[key].latitude, lng: obj[key].longitude };
             createMarker(MarkerLatLng, 'Gas Station', obj[key]);
             $(".btn-group-vertical").click(function() {
-                $('.modal').modal({
+                $('#mapsModal').modal({
                     show: true
                 });
             });
