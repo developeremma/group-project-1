@@ -16,12 +16,12 @@ height:100%;
 width:100%;
 	
 }	
-footer{
+/* footer{
 position:absolute;
 width:100%;
 bottom:0;
 font-size:15px;
-}
+} */
 #messageModal{
   color:black;
   width: 400px;
