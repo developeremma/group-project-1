@@ -10,6 +10,15 @@ height:100%;
 width:100%;
 	
 }
+#weathercontainer {
+  /*may animate this*/
+}
+
+#weather-value,#weather-location,#weather-description
+{
+ font-family: 'Lato', Helvetica;
+font-weight: 300;
+}
 #lifesavercardbody{
   color:white;
   text-align: center;
