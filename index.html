@@ -30,6 +30,8 @@
       <div class="container">
         <a class="navbar-brand" href="https://developeremma.github.io/group-project-1/"><img src="assets/images/logo.png"></a>
       </div>
+	<div class="container"><p id="weather-value"></p><p><span id="weather-location"></span></p><p><span id="weather-description"></span></p>
+      </div>
     </nav>
       <!-- modal -->
  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
@@ -42,7 +44,21 @@
     </div>
   </div>
 </div>
+	  
+<!-- modal location validation-->
 
+<div class="modal fade" id="messageModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+            <p>Note: You must allow location in your browser in order to get the most out of this site.</p>
+            </div>
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="dissmissButtonLocation">Close</button>
+        </div>
+    </div>
+</div>
 
     <!-- Page Content -->
     <div class="container">
